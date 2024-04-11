@@ -5,12 +5,13 @@ import Footer from "./Footer"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import { verifyRouter,getUserRouter } from "../utils/apiRoutes";
+import { verifyRouter,getUserRouter,changeEmailRouter } from "../utils/apiRoutes";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"; 
 
 function EmailVerification() {
   const [userInfo, setUserInfo]= useState(null);
+  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   
    // CSS of toast 
@@ -25,8 +26,26 @@ function EmailVerification() {
     theme:"light"
     }
 
+  const verifyEmail = async()=>{
+    if(!userInfo) return ;
+
+    const userId= userInfo._id;
+    const res = await axios.post(`${verifyRouter}/${userId}`,{
+      userInfo
+    });
+    const emailInfo = res.data;
+    console.log(emailInfo);
+    if(emailInfo.success === false) 
+    toast.error(emailInfo.data.error.error.message);
+
+    if(emailInfo.success === true) 
+    toast.info(emailInfo.message);
+  }  
+  
+  
   useEffect(()=>{
-    async function getuserDetails(){
+      if (toggle) {
+      async function getuserDetails(){
       const user= localStorage.getItem("userData");
       const userId= JSON.parse(user)._id;
       const res = await axios.get(`${getUserRouter}/${userId}`);
@@ -36,34 +55,35 @@ function EmailVerification() {
       toast.error("something went wrong refresh the page");
 
       if(userInfor.success === true) 
-      setUserInfo(userInfor.data.user);
+      {  
+        setUserInfo(userInfor.data.user);
+      }
      
+      }
+      getuserDetails();
+      setToggle(false); 
     }
-    getuserDetails();
-  },[]);
+  },[toggle]);
 
-  useEffect(()=>{
+  useEffect(() => {
+    // To stop the api from calling two times 
+    setToggle(true);
+  }, []);
 
-    async function verifyEmail(){
-      // console.log("verifyemail fun");
-      const userId= userInfo._id;
-      const res = await axios.post(`${verifyRouter}/${userId}`,{
-        userInfo
-      });
-      const emailInfo = res.data;
-      // console.log(emailInfo);
-      if(emailInfo.success === false) 
-      toast.error(emailInfo.message);
-
-      if(emailInfo.success === true) 
-      toast.info(emailInfo.message);
-    }
-    verifyEmail();
-    
+  useEffect(()=>{ 
+    if(userInfo)
+    verifyEmail();   
   },[userInfo]);
 
+  const sendEmailAgain = async()=>{
+    await verifyEmail();
+  }
+
+  const ChangeEmailId = async()=>{
+      navigate("/change-email");
+  }
+
   return (
-    // <div>EmailVerification</div>
     <>
     <Header/>
     <div className="flex flex-col items-center justify-center mb-20 px-10">
@@ -82,13 +102,13 @@ function EmailVerification() {
       <div className=" mb-2">Please verify your email address. We&apos;ve sent a confirmation email to:</div>
       <div className="font-bold text-center mb-2  text-black">{userInfo ? userInfo.email : ""}</div>
       <div className=" mb-2">Click the confirmatin link in that email to begin using Dribble.</div>
-      <div className=" mb-2 w-2/3 m-auto">Didn&apos;t receive the email? Check your Spam folder, it may have been caught by a filter. If you still don&apos;t see it, you can <span className="text-pink-500">resend the confirmation email.</span></div>
-      <div className="mb-2">Wrong email address? <span className="text-pink-500">Change it.</span></div>
+      <div className=" mb-2 w-2/3 m-auto">Didn&apos;t receive the email? Check your Spam folder, it may have been caught by a filter. If you still don&apos;t see it, you can <span className="text-pink-500"><button onClick={sendEmailAgain}>resend the confirmation email.</button></span></div>
+      <div className="mb-2">Wrong email address? <span className="text-pink-500"><button onClick={ChangeEmailId}>Change it.</button></span></div>
 
     </div>
-  </div>
-  <Footer/>
-  <ToastContainer />
+    </div>
+    <Footer/>
+    <ToastContainer />
     </>
   )
 }
