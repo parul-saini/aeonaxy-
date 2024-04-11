@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { sendEmailAgainRouter } from "../utils/apiRoutes";
+
 import {  useNavigate } from "react-router-dom";
 import verfication from "../assets/verification.png"
 import unverified from "../assets/unverified.png"

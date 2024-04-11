@@ -65,5 +65,35 @@ const getUser= async(req,res)=>{
         )
     }
 }
-export {Register,getUser};
+
+const updateInfo= async(req,res)=>{
+    const {userId} = req.params;
+    const {email} = req.body;
+    console.log(email);
+    try {
+        const user = await User.findByIdAndUpdate(
+            userId,
+            {
+                $set:{email}
+            },{
+                new:true
+            }
+        )
+
+        if(!user)
+        throw new ApiError(500,"User not exists with this id ");
+
+         return res.status(200)
+        .json(
+            new apiResponse(200,{user},"Successfully Updated user email Id")
+        )
+    } catch (error) {
+        res.status(200)
+        .json(
+            new apiResponse(500,{error},"Something went wrong")
+        )
+    }
+}
+
+export {Register,getUser,updateInfo};
 
