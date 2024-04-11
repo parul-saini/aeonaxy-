@@ -1,0 +1,33 @@
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
+const app = express();
+
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials:true,
+}));
+// express.json() middleware parses the JSON data and makes it available in req.body of your route handlers.
+app.use(express.json());
+// Middleware to parse URL-encoded bodies
+app.use(express.urlencoded({extended:true, limit:"16kb"}));
+app.use(express.static("public"));
+app.use(cookieParser());
+
+app.get("/home",(req,res)=>{
+    res.send("home page");
+})
+
+
+// routes import 
+import userRoutes from "./routes/user.router.js";
+import profileRoutes from "./routes/profile.router.js";
+import verifyRoutes from "./routes/verify.router.js";
+
+// routes declaration
+app.use("/users",userRoutes);
+app.use("/profile",profileRoutes);
+app.use("/verify",verifyRoutes);
+
+export default app;
