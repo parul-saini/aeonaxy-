@@ -68,7 +68,7 @@ function Register() {
             <div className="text-right mb-6 text-xs font-semibold">Already a member?<a className="text-blue-600 hover:underline dark:text-blue-800"> Sign In</a></div>
           <div className="container  md:w-96 m-auto">
             <div className="container align-align-items-center justify-content-center ">
-              <div className="font-bold text-2xl mb-6">Register to Dribble</div>
+              <div className="font-bold text-2xl mb-6">Sign up to Dribble</div>
               <div className=" text-red-600 mb-6 text-sm  ">
                 {errors.userName && <div>• {errors.userName.message}</div>}
                 {errors.password && <div>• {errors.password.message}</div>}
