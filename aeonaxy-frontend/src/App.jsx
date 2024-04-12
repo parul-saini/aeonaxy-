@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom"
 import EmailVerification from "./components/EmailVerification";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import home from "./assets/home.png";
 
 function App() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function App() {
   return (
     <>   
       <Header/> 
-      home page 
+       <img src={home} alt="" srcset="" />
       <Footer/>
     </>
   )
