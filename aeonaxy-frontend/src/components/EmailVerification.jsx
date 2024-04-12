@@ -34,7 +34,7 @@ function EmailVerification() {
       userInfo
     });
     const emailInfo = res.data;
-    console.log(emailInfo);
+    //console.log(emailInfo);
     if(emailInfo.success === false) 
     toast.error(emailInfo.data.error.error.message);
 
@@ -78,7 +78,7 @@ function EmailVerification() {
   const sendEmailAgain = async()=>{
     await verifyEmail();
   }
-
+  
   const ChangeEmailId = async()=>{
       navigate("/change-email");
   }
