@@ -66,7 +66,7 @@ function CheckVerifiedUser (){
             {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEckQG_u1TWJV34UL_lfTo5zeAnJiLPdLhmg&s" alt=""  /> */}
             {/* <img src="https://i0.wp.com/nrifuture.com/wp-content/uploads/2022/05/comp_3.gif?fit=800%2C600&ssl=1" alt=""  /> */}
             <div className='font-bold md:text-2xl mb-3'>Verification Failed</div>
-            <div className='text-gray-500 md:text-sm'>Please contact us for next steps</div>
+            <div className='text-gray-500 md:text-sm'>Please resend the email and try again</div>
           <div>    
             {/* <button onClick={sendEmailAgain}>Send Email Again </button> */}
           </div>
