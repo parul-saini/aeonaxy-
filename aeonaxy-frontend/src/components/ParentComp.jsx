@@ -53,7 +53,6 @@ function ParentComp() {
         ,{
           headers: { "Content-Type": "multipart/form-data" },
         });
-        console.log(res);
         navigate("/verify")
       }
     const nextFormStep = ()=>{

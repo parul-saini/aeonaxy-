@@ -30,13 +30,13 @@ function ChangeEmail() {
 
     const onSubmit = async(data) => {
       const {email}= data;
-      console.log(data);
+  
       const user= localStorage.getItem("userData");
       const userId= JSON.parse(user)._id;
       const res = await axios.patch(`${changeEmailRouter}/${userId}`,{
         email,
       }); 
-      console.log(res);
+   
     
       if(res.data.success === false )
       toast.error(res.data.message, toastCSS);

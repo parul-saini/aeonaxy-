@@ -11,18 +11,18 @@ import ChangeEmail from './components/ChangeEmail.jsx'
 
 const routes = createBrowserRouter(createRoutesFromElements(
   <>
+     <Route path="/" element={<App />}/>
      <Route path="/sign-up" element={<Register/>}/>
      <Route path="/change-email" element={<ChangeEmail/>}/>
      <Route path='/get-started'element={<ParentComp/>}/>
      <Route path="/verify" element={ <EmailVerification/>}/>
-     <Route path="/verify/user/:userId/:uniqueString" element={ <CheckVerifiedUser/>}/>
-     <Route path='/' element={<App/>}/>
+     <Route path="/verify/user/:userId/:uniqueString" element={<CheckVerifiedUser/>}/>
+     
   </>
 ))
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={routes}>
-      <App />
     </RouterProvider>
   </React.StrictMode>,
 )

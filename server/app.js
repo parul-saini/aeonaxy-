@@ -1,13 +1,12 @@
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+dotenv.config();
 
 const app = express();
 
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials:true,
-}));
+app.use(cors());
 // express.json() middleware parses the JSON data and makes it available in req.body of your route handlers.
 app.use(express.json());
 // Middleware to parse URL-encoded bodies
