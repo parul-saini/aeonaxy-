@@ -36,4 +36,23 @@ const profile = async(req,res)=>{
         
 }
 
-export { profile};
+const getProfile = async(req, res)=>{
+    try {
+        const {userId}= req.params;
+        if(!userId) throw new ApiError(404, "UserId not found");
+
+        const profile = await Profile.findOne({userId});
+        console.log(profile);
+        res.status(200)
+        .json(
+            new apiResponse(200,{profile},"Successfully created the  profile")
+        )
+    } catch (error) {
+        console.log(error);
+        res.status(500)
+        .json(
+            new apiResponse(500,{},"Failed to get the profile")
+        )
+    }
+}
+export { profile, getProfile};
