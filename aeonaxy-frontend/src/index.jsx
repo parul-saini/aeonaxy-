@@ -16,7 +16,7 @@ const routes = createBrowserRouter(createRoutesFromElements(
      <Route path="/change-email" element={<ChangeEmail/>}/>
      <Route path='/get-started'element={<ParentComp/>}/>
      <Route path="/verify" element={ <EmailVerification/>}/>
-     <Route path="/verify/user/:userId/:uniqueString" element={ <CheckVerifiedUser/>}/>
+     <Route path="/verify/user/:userId/:uniqueString" element={<CheckVerifiedUser/>}/>
      
   </>
 ))
