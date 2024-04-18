@@ -71,6 +71,14 @@ function EmailVerification() {
   }, []);
 
   useEffect(()=>{ 
+    // if(!userInfo){
+    //   navigate('/sign-up');
+    //   return;
+    // }
+    if(userInfo?.verified===true)  {
+      navigate("/");
+      return;
+    }
     if(userInfo)
     verifyEmail();   
   },[userInfo]);

@@ -42,10 +42,10 @@ const getProfile = async(req, res)=>{
         if(!userId) throw new ApiError(404, "UserId not found");
 
         const profile = await Profile.findOne({userId});
-        console.log(profile);
+        // console.log(profile);
         res.status(200)
         .json(
-            new apiResponse(200,{profile},"Successfully created the  profile")
+            new apiResponse(200,{profile},"Successfully retrieved the  profile")
         )
     } catch (error) {
         console.log(error);

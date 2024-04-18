@@ -17,7 +17,7 @@ function App() {
   return (
     <>   
       <Header/> 
-       <img src={home} alt="" />
+       <img src={home} alt="home" />
       <Footer/>
     </>
   )

@@ -5,7 +5,6 @@ import {apiResponse} from "../utils/apiResponse.js";
 
 const Register = async(req,res)=>{
     const {name,userName,email,password}= req.body;
-    console.log(req.body);
     if(
         [name,userName,email,password].some((field)=> field?.trim() === "")
     )

@@ -83,7 +83,7 @@ function CheckVerifiedUser (){
             <img src={unverified} className='h-56 md:h-80'  alt="unverified"  />
             <div className='font-bold md:text-2xl mb-3'>Verification Failed</div>
             <div className='text-gray-500 md:text-sm'>Please resend the email and try again</div>
-          
+            <button className=' bg-pink-500  hover:bg-pink-600 font-medium rounded-lg sm:text-sm px-2 sm:px-4 lg:px-5 py-2  mr-2   text-white text-xs mt-6'><a href='/verify'>Go Back to verify</a></button>
         </div> 
     }
     <ToastContainer />

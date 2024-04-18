@@ -1,7 +1,23 @@
 import { useState } from "react"
 import logo from "../assets/logo.png"
+import { useEffect } from "react";
+import axios from "axios";
+import { profileRouter } from "../utils/apiRoutes";
 function Header() {
     const [toggleHeader, setToggleHeader] = useState(false);
+    const [image, setImage] = useState("");
+    useEffect(()=>{
+        
+        const fetchImage = async()=>{
+            const user= localStorage.getItem("userData");
+            const userId= JSON.parse(user)._id;
+            await axios.get(`${profileRouter}/${userId}`).then((res)=>{
+                const image = res.data.data.profile.profileImage;
+                setImage(image)
+            })
+        }
+        fetchImage();
+    },[])
   return (
     <header>
     <nav className=" border-b-2  ">
@@ -23,8 +39,8 @@ function Header() {
                 </div>
             </form>
 
-                <img src="https://i.pinimg.com/236x/06/0a/25/060a25dce1a48ef018fffeea4cd9eb85.jpg" className="sm:mx-4 mx-2 sm:w-8 sm:h-8 w-6 h-6 rounded-full " alt="avatar"/>
-                <a href="#" className=" bg-pink-500  hover:bg-gray-600 font-medium rounded-lg sm:text-sm px-2 sm:px-4 lg:px-5 py-2  mr-2   text-white text-xs">Upload</a>
+                <img src={image} className="sm:mx-4 mx-2 sm:w-8 sm:h-8 w-6 h-6 rounded-full " alt="avatar"/>
+                <a href="#" className=" bg-pink-500  hover:bg-pink-600 font-medium rounded-lg sm:text-sm px-2 sm:px-4 lg:px-5 py-2  mr-2   text-white text-xs">Upload</a>
                 <button onClick={()=>setToggleHeader(state=>!state)} data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center sm:p-2  text-sm text-gray-500 rounded-lg lg:hidden  sm:me-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="mobile-menu-2" aria-expanded="false">
                     <span className="sr-only">Open main menu</span>
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
